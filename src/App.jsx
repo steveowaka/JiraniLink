@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/providers' element={<Providers />} />
-        <Route path='/providers/:prooviderId' element={<ProviderDetails />} />
+        <Route path='/providers/:providerId' element={<ProviderDetails />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/addprovider' element={<AddProvider />} />

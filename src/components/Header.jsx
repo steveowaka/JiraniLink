@@ -16,7 +16,7 @@ function Header(){
 
             <div className="flex items-center gap-4">
                 <Link to="/Login" className="px-6 py-3 border border-green-700 text-green-700 rounded-lg font-semibold hover:bg-green-50 transition">Login</Link>
-                <Link to="/Sign Up" className="px-6 py-3 bg-green-700 text-white rounded-lg font-semibold hover:bg-green-800 transition">Sign Up</Link>
+                <Link to="/SignUp" className="px-6 py-3 bg-green-700 text-white rounded-lg font-semibold hover:bg-green-800 transition">Sign Up</Link>
             </div>
 
         </header>
