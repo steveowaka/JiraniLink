@@ -2,15 +2,18 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import './firebase.js' 
+import './firebase.js'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { BrowserRouter } from 'react-router-dom'
 
-  
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-    <App />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

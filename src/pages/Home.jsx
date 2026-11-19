@@ -35,7 +35,7 @@ function Home(){
                     <input type = "text"
                      placeholder = "search by service or location"
                      value = {searchTerm}
-                     onChange = {(e) => setSearchcartegory(e.target.value)}
+                     onChange = {(e) => setSearchTerm(e.target.value)}
                      className="flex-1 min-w-0 h-15 px-5 bg-white border-2 border-[#A1AAB5] rounded-xl text-lg text-gray-800 outline-none focus:border-green-700"
                     />
 
@@ -48,7 +48,7 @@ function Home(){
                         <button
                         key={category}
                         type="button"
-                        onClick={() => setSearchcartegory(category)}
+                        onClick={() => setSearchTerm(category)}
                          className="px-6 py-3 border-2 border-[#15803D] rounded-full text-[#15803D] text-lg font-semibold hover:bg-[#15803D] hover:text-white transition-colors"
                         >{category}</button>
                     ))}
