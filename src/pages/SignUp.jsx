@@ -26,15 +26,9 @@ function SignUp() {
         setLoading(true)
 
         try {
-            const userCridential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            )
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
 
-            await updateProfile(userCridential.user, {
-                displayName: fullName
-            })
+            await updateProfile(userCredential.user, { displayName: fullName })
 
             await signOut(auth)
 
@@ -44,12 +38,11 @@ function SignUp() {
                 }
             })
         } catch (error) {
-            if (error.code === "auth/email-already-in-us") {
+            if (error.code === "auth/email-already-in-use") {
                 setError("Email already in use. Please use another email.")
-
             } else if (error.code === "auth/invalid-email") {
                 setError("Please enter a valid email address")
-                
+
             } else if (error.code === 'auth/weak-password') {
                 setError('Password must be at least 6 characters.')
             }
@@ -115,7 +108,7 @@ function SignUp() {
                     </div>
 
                     <div>
-                        <label className="block text-lg font-semibold text-gray-800 mb-2">password</label>
+                        <label htmlFor="password" className="block text-lg font-semibold text-gray-800 mb-2">Password</label>
                         <input type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -142,7 +135,7 @@ function SignUp() {
                     disabled={loading}
                     className="w-full h-[68px] border-2 border-green-700 text-green-700 text-lg font-semibold rounded-xl hover:bg-green-50 disabled:opacity-60 transition">Continue with Google</button>
 
-                <p className="text-center text-lg text-gray-600 mt-7">Already have an account? {""}
+                <p className="text-center text-lg text-gray-600 mt-7">Already have an account?{" "}
                     <Link to="/login" className="hover:text-green-700">
                         Log In
                     </Link>
