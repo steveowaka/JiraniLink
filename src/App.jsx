@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import AddProvider from './pages/AddProvider'
 import ProviderDetails from './pages/ProviderDetails'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
 
@@ -14,7 +15,10 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/providers' element={<Providers />} />
+        <Route path='/providers' element={
+          <ProtectedRoute>
+            <AddProvider />
+          </ProtectedRoute>} />
         <Route path='/providers/:providerId' element={<ProviderDetails />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
