@@ -15,7 +15,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/providers' element={Providers} />
+        <Route path='/providers' element={<Providers />} />
         <Route path='/providers/:providerId' element={<ProviderDetails />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
