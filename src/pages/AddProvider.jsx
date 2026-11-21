@@ -70,7 +70,7 @@ function AddProvider() {
         e.preventDefault()
         setSubmitError("")
 
-        const newErrors = validate
+        const newErrors = validate()
         setErrors(newErrors)
 
         if (Object.keys(newErrors).length > 0) {
