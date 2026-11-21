@@ -1,15 +1,16 @@
 import { useState } from "react";   
+import { CATEGORIES } from "../constants/categories"
 
 function Home(){
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const categories = [
-        "Plumbers",
-        "Tutors",
-        "BabySiters",
-        "Mechanics"
-    ]
+    // const categories = [
+    //     "Plumbers",
+    //     "Tutors",
+    //     "Babysitters",
+    //     "Mechanics"
+    // ]
 
     function handleSearch(e){
         e.preventDefault()
@@ -44,7 +45,7 @@ function Home(){
                 </form>
 
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
-                    {categories.map((category) => (
+                    {CATEGORIES.map((category) => (
                         <button
                         key={category}
                         type="button"

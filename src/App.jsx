@@ -15,14 +15,14 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/providers' element={
-          <ProtectedRoute>
-            <AddProvider />
-          </ProtectedRoute>} />
+        <Route path='/providers' element={Providers} />
         <Route path='/providers/:providerId' element={<ProviderDetails />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/addprovider' element={<AddProvider />} />
+        <Route path='/addprovider' element={ 
+           <ProtectedRoute>
+            <AddProvider />
+          </ProtectedRoute>} />
       </Routes>
     </>
 
