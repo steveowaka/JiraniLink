@@ -108,6 +108,22 @@ function ProviderDetails() {
                                 </div>
                             </dl>
 
+                            {provider.coordinates && (
+                                <div className="flex gap-2">
+                                    <dt className="font-semibold text-gray-800">Map:</dt>
+                                    <dd>
+                                        <a
+                                            href={`https://www.openstreetmap.org/?mlat=${provider.coordinates.lat}&mlon=${provider.coordinates.lon}#map=16/${provider.coordinates.lat}/${provider.coordinates.lon}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-green-700 font-medium hover:underline"
+                                        >
+                                            View on OpenStreetMap
+                                        </a>
+                                    </dd>
+                                </div>
+                            )}
+
                             <p className="mt-6 text-lg text-gray-700">{provider.description}</p>
 
                             {addedOn && (
