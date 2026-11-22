@@ -34,7 +34,7 @@ function Header() {
                 <Link to="/" className="text-2xl font-bold text-green-700">JiraniLink</Link>
             </div>
 
-            <nav className="hidden 1g:flex items-center gap-10">
+            <nav className="hidden lg:flex items-center gap-10">
                 <Link to="/" className="text-gray-700 font-medium hover:text-green-700 transition">Home</Link>
                 <Link to="/providers" className="text-gray-700 font-medium hover:text-green-700 transition">Providers</Link>
                 {user && (
@@ -42,7 +42,7 @@ function Header() {
                 )}
             </nav>
 
-            <div className="hidden 1g:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-4">
                 {loading ? null : user ? (
                     <>
                         <span className="hidden md:block text-gray-700 font-medium">Hi, {firstName}</span>
