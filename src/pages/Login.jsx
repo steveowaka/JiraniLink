@@ -30,7 +30,7 @@ function Login() {
             await signInWithEmailAndPassword(auth, email, password)
             navigate("/")
         } catch (error) {
-            console.log("Firebase login error:", error.code);
+            console.error("Firebase login error:", error.code);
 
             if (
                 error.code === "auth/invalid-credential" ||

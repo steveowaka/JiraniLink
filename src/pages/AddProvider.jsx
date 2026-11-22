@@ -5,7 +5,6 @@ import { db } from "../firebase"
 import { useAuth } from "../context/AuthContext"
 import { CATEGORIES } from "../constants/categories"
 import FormField from "../components/FormField"
-import { log } from "firebase/crashlytics"
 import { searchLocation } from "../services/geocode"
 
 const inputClass = "w-full h-[58px] border-2 border-gray-400 rounded-xl px-4 text-lg outline-none focus:border-green-700"
