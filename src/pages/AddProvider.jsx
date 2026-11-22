@@ -7,8 +7,8 @@ import { CATEGORIES } from "../constants/categories"
 import FormField from "../components/FormField"
 import { searchLocation } from "../services/geocode"
 
-const inputClass = "w-full h-[58px] border-2 border-gray-400 rounded-xl px-4 text-lg outline-none focus:border-green-700"
-const textareaClass = "w-full min-h-[120px] border-2 border-gray-400 rounded-xl px-4 py-3 text-lg outline-none focus:border-green-700"
+const inputClass = "w-full h-[44px] border-2 border-gray-400 rounded-lg px-3 text-based outline-none focus:border-green-700"
+const textareaClass = "w-full min-h-[80px] border-2 border-gray-400 rounded-lg px-3 py-2 text-based outline-none focus:border-green-700"
 
 const emptyForm = {
     name: "",
@@ -166,7 +166,7 @@ function AddProvider() {
     return (
         <main className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-10 bg-white">
 
-            <section className="w-full max-w-[680px] border-2 border-gray-300 rounded-2xl p-6 sm:p-8">
+            <section className="w-full max-w-[680px] border-2 border-gray-300 rounded-2xl p-5 sm:p-6">
 
                 <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">Add a Provider</h1>
 
