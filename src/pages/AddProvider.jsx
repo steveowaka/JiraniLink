@@ -15,7 +15,6 @@ const emptyForm = {
     category: "",
     location: "",
     phone: "",
-    description: "",
     hireAgain: "",
     reviewText: "",
 }
@@ -100,9 +99,6 @@ function AddProvider() {
         } else if (!/^[0-9+\s-]{9,15}$/.test(formData.phone.trim())) {
             newErrors.phone = "Enter a valid phone number, e.g. 0712 345 678."
         }
-        if (!formData.description.trim()) {
-            newErrors.description = "Please describe the service."
-        }
         if (!formData.hireAgain) {
             newErrors.hireAgain = "Please choose Yes or No."
         }
@@ -134,7 +130,6 @@ function AddProvider() {
                 category: formData.category,
                 location: formData.location.trim(),
                 phone: formData.phone.trim(),
-                description: formData.description.trim(),
                 createdBy: user.uid,
                 createdByName: authorName,
                 createdAt: serverTimestamp(),
@@ -227,13 +222,13 @@ function AddProvider() {
                                 }}
                                 aria-invalid={!!errors.location}
                                 aria-describedby={errors.location ? "location-error" : undefined}
-                                className={`${inputClass} min-w-0 flex-1`}
+                                className={`${inputClass} min-w-0 sm:flex-1`}
                             />
                             <button
                                 type="button"
                                 onClick={handleLocationSearch}
                                 disabled={searchingLocation}
-                                className="h-[58px] px-6 border-2 border-green-700 text-green-700 rounded-xl font-semibold hover:bg-green-50 disabled:opacity-60 transition"
+                                className="w-full sm:w-auto h-[44px] px-5 text-base border-2 border-green-700 text-green-700 rounded-lg font-semibold hover:bg-green-50 disabled:opacity-60 transition"
                             >
                                 {searchingLocation ? "Searching..." : "Search place"}
                             </button>
@@ -282,18 +277,6 @@ function AddProvider() {
                             aria-invalid={!!errors.phone}
                             aria-describedby={errors.phone ? "phone-error" : undefined}
                             className={inputClass}
-                        />
-                    </FormField>
-
-                    <FormField label="Description" name="description" error={errors.description}>
-                        <textarea
-                            id="description"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            aria-invalid={!!errors.description}
-                            aria-describedby={errors.description ? "description-error" : undefined}
-                            className={textareaClass}
                         />
                     </FormField>
 

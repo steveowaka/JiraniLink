@@ -37,10 +37,10 @@ function Home(){
                      placeholder = "search by service or location"
                      value = {searchTerm}
                      onChange = {(e) => setSearchTerm(e.target.value)}
-                     className="flex-1 min-w-0 h-15 px-5 bg-white border-2 border-[#A1AAB5] rounded-xl text-lg text-gray-800 outline-none focus:border-green-700"
+                     className="w-full sm:flex-1 min-w-0 h-[56px] px-5 bg-white border-2 border-[#A1AAB5] rounded-xl text-base md:text-lg text-gray-800 outline-none focus:border-green-700"
                     />
 
-                    <button type="submit" className="h-15 px-10 bg-[#15803D] text-white text-lg font-semibold rounded-xl hover:bg-green-800 transition-colors">Search</button>
+                    <button type="submit" className="w-full sm:w-auto h-[56px] px-10 bg-[#15803D] text-white text-base md:text-lg font-semibold rounded-xl hover:bg-green-800 transition-colors">Search</button>
                 
                 </form>
 

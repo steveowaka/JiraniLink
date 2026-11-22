@@ -124,8 +124,6 @@ function ProviderDetails() {
                                 </div>
                             )}
 
-                            <p className="mt-6 text-lg text-gray-700">{provider.description}</p>
-
                             {addedOn && (
                                 <p className="mt-6 text-sm text-gray-500">
                                     Added by {provider.createdByName} on {addedOn}
