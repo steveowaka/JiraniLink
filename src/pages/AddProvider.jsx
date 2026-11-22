@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext"
 import { CATEGORIES } from "../constants/categories"
 import FormField from "../components/FormField"
 import { log } from "firebase/crashlytics"
+import { searchLocation } from "../services/geocode"
 
 const inputClass = "w-full h-[58px] border-2 border-gray-400 rounded-xl px-4 text-lg outline-none focus:border-green-700"
 const textareaClass = "w-full min-h-[120px] border-2 border-gray-400 rounded-xl px-4 py-3 text-lg outline-none focus:border-green-700"
@@ -30,10 +31,57 @@ function AddProvider() {
     const [submitError, setSubmitError] = useState("")
     const [loading, setLoading] = useState(false)
 
+    const [coordinates, setCoordinates] = useState(null)
+    const [locationResults, setLocationResults] = useState([])
+    const [searchingLocation, setSearchingLocation] = useState(false)
+    const [locationMessage, setLocationMessage] = useState("")
 
     function handleChange(e) {
         const { name, value } = e.target
         setFormData((prev) => ({ ...prev, [name]: value }))
+
+        if (name === "location") {
+            setCoordinates(null)
+            setLocationResults([])
+            setLocationMessage("")
+        }
+    }
+
+    async function handleLocationSearch() {
+        const term = formData.location.trim()
+
+        if (!term) {
+            setErrors((prev) => ({ ...prev, location: "Type a place to search for." }))
+            return
+        }
+
+        setErrors((prev) => ({ ...prev, location: "" }))
+        setSearchingLocation(true)
+        setLocationMessage("")
+        setLocationResults([])
+
+        try {
+            const results = await searchLocation(term)
+
+            if (results.length === 0) {
+                setLocationMessage("No places found. Try a nearby area or a landmark.")
+            }
+            setLocationResults(results)
+        } catch (error) {
+            console.error("Location search error:", error)
+            setLocationMessage("Could not search places right now. You can still type your location and save.")
+        } finally {
+            setSearchingLocation(false)
+        }
+    }
+
+    function handleSelectLocation(place) {
+        const shortName = place.name.split(", ").slice(0, 3).join(", ")
+
+        setFormData((prev) => ({ ...prev, location: shortName }))
+        setCoordinates({ lat: place.lat, lon: place.lon })
+        setLocationResults([])
+        setLocationMessage("")
     }
 
     function validate() {
@@ -165,16 +213,64 @@ function AddProvider() {
                     </FormField>
 
                     <FormField label="Location" name="location" error={errors.location}>
-                        <input
-                            id="location"
-                            name="location"
-                            type="text"
-                            value={formData.location}
-                            onChange={handleChange}
-                            aria-invalid={!!errors.location}
-                            aria-describedby={errors.location ? "location-error" : undefined}
-                            className={inputClass}
-                        />
+                        <div className="flex flex-col sm:flex-row gap-3">
+                            <input
+                                id="location"
+                                name="location"
+                                type="text"
+                                value={formData.location}
+                                onChange={handleChange}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        e.preventDefault()
+                                        handleLocationSearch()
+                                    }
+                                }}
+                                aria-invalid={!!errors.location}
+                                aria-describedby={errors.location ? "location-error" : undefined}
+                                className={`${inputClass} min-w-0 flex-1`}
+                            />
+                            <button
+                                type="button"
+                                onClick={handleLocationSearch}
+                                disabled={searchingLocation}
+                                className="h-[58px] px-6 border-2 border-green-700 text-green-700 rounded-xl font-semibold hover:bg-green-50 disabled:opacity-60 transition"
+                            >
+                                {searchingLocation ? "Searching..." : "Search place"}
+                            </button>
+                        </div>
+
+                        <p className="mt-2 text-sm text-gray-500">
+                            Optional: search to pin the exact place on the map.
+                        </p>
+
+                        {locationMessage && (
+                            <p role="status" className="mt-2 text-sm text-gray-700">{locationMessage}</p>
+                        )}
+
+                        {locationResults.length > 0 && (
+                            <ul className="mt-3 border-2 border-gray-300 rounded-xl divide-y divide-gray-200">
+                                {locationResults.map((place) => (
+                                    <li key={place.id}>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleSelectLocation(place)}
+                                            className="w-full text-left px-4 py-3 text-gray-700 hover:bg-green-50"
+                                        >
+                                            {place.name}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+
+                        {coordinates && (
+                            <p role="status" className="mt-2 text-sm font-semibold text-green-700">
+                                ✓ Place pinned on the map
+                            </p>
+                        )}
+
+                        <p className="mt-2 text-xs text-gray-500">Place search by © OpenStreetMap contributors</p>
                     </FormField>
 
                     <FormField label="Phone number" name="phone" error={errors.phone}>
