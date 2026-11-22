@@ -89,7 +89,9 @@ function SignUp() {
                 <form onSubmit={handleSignUp} className="space-y-6">
                     <div>
                         <label className="block text-lg font-semibold text-gray-800 mb-2">Full name</label>
-                        <input type="text"
+                        <input
+                            id="fullname"
+                            type="text"
                             value={fullName}
                             required
                             onChange={(e) => setFullName(e.target.value)}
@@ -98,7 +100,9 @@ function SignUp() {
 
                     <div>
                         <label className="block text-lg font-semibold text-gray-800 mb-2">Email address</label>
-                        <input type="email"
+                        <input
+                            id="email"
+                            type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -109,7 +113,9 @@ function SignUp() {
 
                     <div>
                         <label htmlFor="password" className="block text-lg font-semibold text-gray-800 mb-2">Password</label>
-                        <input type="password"
+                        <input
+                            id="password"
+                            type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
