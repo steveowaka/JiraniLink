@@ -1,7 +1,7 @@
 
 
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { collection, getDocs, orderBy, query } from "firebase/firestore"
 import { db } from "../firebase"
 import { CATEGORIES } from "../constants/categories"
@@ -10,8 +10,9 @@ function Providers() {
     const [providers, setProviders] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
+    const [searchParams] = useSearchParams()
 
-    const [searchTerm, setSearchTerm] = useState("")
+    const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "")
     const [category, setCategory] = useState("All")
 
     useEffect(() => {
